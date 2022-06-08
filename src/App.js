@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
+import CultureMap from "./pages/CultureMap/CultureMap";
+import Home from "./pages/Home/Home";
+import "./App.css";
+import Cultures from "./pages/Cultures/Cultures";
+import CultureDetail from "./pages/CultureDetail/CultureDetail";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div class="App">
+            <Navbar />
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/">
+                        <Route index element={<Home />} />
+                        <Route path="/map" element={<CultureMap />} />
+                        <Route path="/permainan">
+                            <Route index element={<Cultures />} />
+                            <Route
+                                path=":cultureId"
+                                element={<CultureDetail />}
+                            />
+                        </Route>
+                    </Route>
+                </Routes>
+            </BrowserRouter>
+        </div>
+    );
 }
 
 export default App;
