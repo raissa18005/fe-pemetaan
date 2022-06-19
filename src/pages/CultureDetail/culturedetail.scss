@@ -22,7 +22,8 @@
             margin-bottom: 3rem;
 
             h1 {
-                font-size: 2.5rem;
+                font-size: 2.3rem;
+                text-transform: uppercase;
             }
 
             .regnum {
@@ -65,24 +66,42 @@
             }
         }
 
-        .description {
+        .tab-container {
+            min-height: 500px;
 
-            .img-container {
-                display: flex;
-                align-items: center;
-                justify-content: center;
+            .description {
 
-                img {
-                    width: 100%;
-                    object-fit: cover;
-                    max-height: 400px;
+                .img-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    img {
+                        width: 100%;
+                        object-fit: cover;
+                        max-height: 400px;
+                    }
+                }
+
+                p {
+                    line-height: 2;
+                    text-align: left;
                 }
             }
 
-            p {
-                line-height: 2;
-                text-align: left;
+            .videos-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                align-items: center;
+                justify-content: start;
+
+                iframe {
+                    border: none;
+                }
+
             }
         }
+
     }
 }

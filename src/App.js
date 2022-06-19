@@ -8,7 +8,7 @@ import CultureDetail from "./pages/CultureDetail/CultureDetail";
 
 function App() {
     return (
-        <div class="App">
+        <div className="App">
             <Navbar />
             <BrowserRouter>
                 <Routes>

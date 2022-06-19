@@ -59,7 +59,13 @@
             justify-content: center;
             gap: 7px;
 
-            .reset {}
+            .reset {
+                border-radius: 4px;
+                padding: 3px 10px;
+                color: #2385d0;
+                background-color: whitesmoke;
+                cursor: pointer;
+            }
         }
     }
 

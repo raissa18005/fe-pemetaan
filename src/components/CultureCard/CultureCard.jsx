@@ -6,7 +6,13 @@ const CultureCard = ({ culture }) => {
     return (
         <div className="card">
             <img
-                src="https://cdn1-production-images-kly.akamaized.net/ZCLMBNZPCckx3xA2jai4dcsXWpo=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/1228107/original/013923000_1462849258-20160510-Lomba-Adu-Gasing-yang-Memukau-di-Taiwan-Reuters-5.jpg"
+                src={
+                    culture.img ===
+                        "https://warisanbudaya.kemdikbud.go.id/dashboard/media/photos/" ||
+                    !culture.img
+                        ? "https://dpwfkdtjabar.com/assets/images/artikel/no-image.png"
+                        : culture.img
+                }
                 alt="permainan"
                 srcset=""
             />
@@ -18,15 +24,19 @@ const CultureCard = ({ culture }) => {
                     </div>
                     <div className="infos">
                         <LocationOnIcon className="icon" />
-                        {culture.province ? culture.province : "-"}
+                        {culture.province.name ? culture.province.name : "-"}
                     </div>
                 </div>
                 <a href="/">
-                    <h1>{culture.title}</h1>
+                    <h1>{culture.name}</h1>
                 </a>
-                <p>{culture.desc.substring(0, 230)} ...</p>
+                {culture.desc ? (
+                    <p>{culture.desc.substring(0, 230)} ...</p>
+                ) : (
+                    <p>Deskripsi belum tersedia</p>
+                )}
                 <div className="info-bottom">
-                    <a className="button" href="/">
+                    <a className="button" href={`/permainan/${culture._id}`}>
                         Read More
                     </a>
                 </div>

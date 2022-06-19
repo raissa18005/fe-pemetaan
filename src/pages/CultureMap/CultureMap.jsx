@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import List from "../../components/List/List";
 import MyMap from "../../components/MyMap/MyMap";
-import Navbar from "../../components/Navbar/Navbar";
 import "./culturemap.scss";
 
 const CultureMap = () => {
+    const [province, setProvince] = useState("");
+
     return (
         <div className="cultureMap">
-            <List />
-            <MyMap />
+            <List province={province} setProvince={setProvince} />
+            <MyMap setProvince={setProvince} />
         </div>
     );
 };

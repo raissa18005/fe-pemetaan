@@ -1,22 +1,74 @@
-import React from "react";
-import {
-    MapContainer,
-    TileLayer,
-    useMap,
-    GeoJSON,
-    Marker,
-    Popup,
-} from "react-leaflet";
+import React, { useEffect, useState } from "react";
+import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
 import { Icon } from "leaflet";
 import "./mymap.scss";
-import mapData from "../../data/indonesia.json";
-import mapData2 from "../../data/data2.json";
+import { publicRequest } from "../../requestMethods";
 
-const MyMap = () => {
-    // console.log(mapData);
-    let data = mapData2.map((map) => map.geojson);
+const MyMap = ({ setProvince }) => {
+    const [provinces, setProvinces] = useState([]);
+    const [calc, setCalc] = useState({});
+
+    useEffect(() => {
+        const getAllData = async () => {
+            try {
+                const totalData = await publicRequest.get(`/cultures/count`);
+                const provinceData = await publicRequest.get(`/provinces`);
+                const calcData = await publicRequest.get(`/cultures/calculate`);
+                setProvinces(
+                    mergeProvincesTotal(provinceData.data, totalData.data)
+                );
+                setCalc(calcData.data);
+            } catch (err) {}
+        };
+        getAllData();
+    }, []);
+
+    const findId = (val, totalData) => {
+        let temp = totalData.filter((item) => item._id === val);
+        return temp[0];
+    };
+
+    const mergeProvincesTotal = (val, totalData) => {
+        const test = val?.map((province) => {
+            const totalTemp = findId(province._id, totalData);
+
+            return {
+                ...province,
+                geojson: {
+                    ...province.geojson,
+                    properties: {
+                        ...province.geojson.properties,
+                        provinceId: totalTemp?._id || "",
+                        total: totalTemp?.count || 0,
+                    },
+                },
+            };
+        });
+        return test;
+    };
+
+    const countryStyle = {
+        color: "black",
+        weight: 1,
+    };
+
+    const onEachCountry = (country, layer) => {
+        if (country.properties.total) {
+            if (country.properties.total >= calc.high) {
+                layer.options.fillColor = "green";
+            } else if (country.properties.total <= calc.low) {
+                layer.options.fillColor = "red";
+            } else {
+                layer.options.fillColor = "yellow";
+            }
+        }
+
+        layer.on("click", function (e) {
+            setProvince(country.properties.provinceId);
+        });
+    };
 
     return (
         <div className="myMap">
@@ -24,14 +76,17 @@ const MyMap = () => {
                 center={[0.7893, 113.9213]}
                 zoom={5}
                 scrollWheelZoom={false}
-                style={{ height: "100%" }}
+                style={{ height: "100%", zIndex: 1 }}
             >
-                <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <GeoJSON data={data}></GeoJSON>
-                {mapData2.map((data) => (
+                {provinces.length > 0 && (
+                    <GeoJSON
+                        style={countryStyle}
+                        data={provinces.map((map) => map.geojson)}
+                        onEachFeature={onEachCountry}
+                    />
+                )}
+
+                {provinces.map((data) => (
                     <Marker
                         position={[data.lat, data.long]}
                         icon={
@@ -41,11 +96,59 @@ const MyMap = () => {
                                 iconAnchor: [12, 41],
                             })
                         }
+                        eventHandlers={{
+                            click: (e) => {
+                                setProvince(data.geojson.properties.provinceId); // will print 'FooBar' in console
+                            },
+                        }}
                     >
-                        <Popup>{data.name}</Popup>
+                        <Popup>
+                            <div className="info">
+                                <b>{data.name}</b>
+                                <p>
+                                    {"Jumlah Permainan Rakyat : " +
+                                        data.geojson.properties.total}
+                                </p>
+                            </div>
+                        </Popup>
                     </Marker>
                 ))}
             </MapContainer>
+            {calc.high && (
+                <div className="legend">
+                    <div className="title">Klasifikasi</div>
+                    <div className="colorInfo">
+                        <div
+                            className="color"
+                            style={{ background: "green" }}
+                        ></div>
+                        <div>
+                            {" > " + Math.floor(calc.high) + " (Jumlah Banyak)"}
+                        </div>
+                    </div>
+                    <div className="colorInfo">
+                        <div
+                            className="color"
+                            style={{ background: "yellow" }}
+                        ></div>
+                        <div>
+                            {Math.floor(calc.low) +
+                                " - " +
+                                Math.floor(calc.high) +
+                                " (Jumlah Sedang)"}
+                        </div>
+                    </div>
+                    <div className="colorInfo">
+                        <div
+                            className="color"
+                            style={{ background: "red" }}
+                        ></div>
+                        <div>
+                            {" < " + Math.floor(calc.low) + " (Jumlah Sedikit)"}
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

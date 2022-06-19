@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { publicRequest } from "../../requestMethods";
 import "./home.scss";
 
 const Home = () => {
@@ -9,10 +10,11 @@ const Home = () => {
                     SIG PEMETAAN PERMAINAN RAKYAT <span>INDONESIA</span>
                 </h1>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Cumque, fuga sit! Labore quaerat fuga veniam, velit qui quas
-                    delectus inventore non. Earum velit numquam tenetur
-                    obcaecati maxime reiciendis voluptate ab.
+                    MAPPIN merupakan website pemetaan permainan rakyat di
+                    Indonesia. Pemetaan permainan disajikan dalam bentuk peta
+                    Indonesia dengan pewarnaan klasifikasi jumlah permainan per
+                    provinsi. Mulai mencari permainan dengan tekan tombol
+                    berikut!
                 </p>
                 <a href="/map">
                     <button>Lihat Peta</button>

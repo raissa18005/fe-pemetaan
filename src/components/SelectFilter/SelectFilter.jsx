@@ -26,7 +26,7 @@ const SelectFilter = ({ options, value, setValue, label }) => {
                 <MenuItem value="">All {label}</MenuItem>
                 {label === "Province"
                     ? options.map((option) => (
-                          <MenuItem value={option.name}>{option.name}</MenuItem>
+                          <MenuItem value={option._id}>{option.name}</MenuItem>
                       ))
                     : options.map((option) => (
                           <MenuItem value={option.value}>
