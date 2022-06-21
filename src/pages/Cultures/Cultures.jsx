@@ -76,6 +76,7 @@ const Cultures = () => {
     };
 
     useEffect(() => {
+        setPage(1);
         const applyFilters = () => {
             let updatedList = cultures;
 
@@ -99,7 +100,7 @@ const Cultures = () => {
             setList(updatedList);
         };
         applyFilters();
-    }, [year, province, inputSearch]);
+    }, [year, province, inputSearch, isLoading]);
 
     return (
         <div className="cultures">

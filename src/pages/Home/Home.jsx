@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-import { publicRequest } from "../../requestMethods";
 import "./home.scss";
 
 const Home = () => {
@@ -20,7 +18,13 @@ const Home = () => {
                     <button>Lihat Peta</button>
                 </a>
             </div>
-            <div className="right"></div>
+            <div className="right">
+                {/* testing */}
+                {/* <img
+                    src="https://www.abundancethebook.com/wp-content/uploads/2019/07/Permainan-Tradisional-Indonesia-Congklak-1024x683.jpeg"
+                    alt=""
+                /> */}
+            </div>
         </div>
     );
 };

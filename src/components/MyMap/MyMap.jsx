@@ -123,7 +123,7 @@ const MyMap = ({ setProvince }) => {
                             style={{ background: "green" }}
                         ></div>
                         <div>
-                            {" > " + Math.floor(calc.high) + " (Jumlah Banyak)"}
+                            {" > " + Math.floor(calc.high) + " (Jumlah Tinggi)"}
                         </div>
                     </div>
                     <div className="colorInfo">
@@ -146,6 +146,15 @@ const MyMap = ({ setProvince }) => {
                         <div>
                             {" < " + Math.floor(calc.low) + " (Jumlah Sedikit)"}
                         </div>
+                    </div>
+                    <div className="provInfo">
+                        Provinsi tinggi : {calc.highProvince}
+                    </div>
+                    <div className="provInfo">
+                        Provinsi sedang : {calc.midProvince}
+                    </div>
+                    <div className="provInfo">
+                        Provinsi sedikit : {calc.lowProvince}
                     </div>
                 </div>
             )}
