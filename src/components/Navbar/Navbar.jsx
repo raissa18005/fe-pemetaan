@@ -8,11 +8,11 @@ const Navbar = () => {
             path: "/",
         },
         {
-            title: "Map",
+            title: "Peta",
             path: "/map",
         },
         {
-            title: "Permainan",
+            title: "Daftar Permainan",
             path: "/permainan",
         },
     ];

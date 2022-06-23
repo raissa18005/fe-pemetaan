@@ -57,7 +57,7 @@ const CultureDetail = () => {
                         </div>
                         <div className="infos">
                             <LocationOnIcon className="icon" />
-                            {culture.name || "-"}
+                            {culture.province.name || "-"}
                         </div>
                         <div className="infos">
                             {"No. " + culture.reg_num || "-"}

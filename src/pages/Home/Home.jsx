@@ -1,4 +1,5 @@
 import "./home.scss";
+import pin from "../../images/pin.png";
 
 const Home = () => {
     return (
@@ -19,6 +20,7 @@ const Home = () => {
                 </a>
             </div>
             <div className="right">
+                <img src={pin} alt="" srcset="" />
                 {/* testing */}
                 {/* <img
                     src="https://www.abundancethebook.com/wp-content/uploads/2019/07/Permainan-Tradisional-Indonesia-Congklak-1024x683.jpeg"
