@@ -14,6 +14,7 @@ const CultureDetail = () => {
     const [culture, setCulture] = useState({});
     const location = useLocation();
     const id = location.pathname.split("/")[2];
+    // console.log(culture);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -45,26 +46,26 @@ const CultureDetail = () => {
             <div className="stripe"></div>
             <div className="cultureDetail-container">
                 <div className="heading">
-                    <h1>{culture.name}</h1>
+                    <h1>{culture?.name}</h1>
                     <div className="regnum">
                         <span>Nomor Registrasi :</span>
-                        <span> {culture.reg_num || "-"}</span>
+                        <span> {culture?.reg_num || "-"}</span>
                     </div>
                     <div className="info-top">
                         <div className="infos">
                             <CalendarTodayIcon className="icon" />
-                            {culture.year || "-"}
+                            {culture?.year || "-"}
                         </div>
                         <div className="infos">
                             <LocationOnIcon className="icon" />
-                            {culture.province.name || "-"}
+                            {culture?.province?.name || "-"}
                         </div>
                         <div className="infos">
-                            {"No. " + culture.reg_num || "-"}
+                            {"No. " + culture?.reg_num || "-"}
                         </div>
                         <div className="infos">
                             Tipe:
-                            {" " + culture.type || "-"}
+                            {" " + culture?.type || "-"}
                         </div>
                     </div>
                     <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
