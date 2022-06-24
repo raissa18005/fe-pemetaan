@@ -52,6 +52,7 @@ const MyMap = ({ setProvince }) => {
     const countryStyle = {
         color: "black",
         weight: 1,
+        fillOpacity: 0.3,
     };
 
     const onEachCountry = (country, layer) => {
@@ -68,6 +69,16 @@ const MyMap = ({ setProvince }) => {
         layer.on("click", function (e) {
             setProvince(country.properties.provinceId);
         });
+        layer.on("mouseover", function (e) {
+            e.target.setStyle({
+                fillOpacity: 0.7,
+            });
+        });
+        layer.on("mouseout", function (e) {
+            e.target.setStyle({
+                fillOpacity: 0.3,
+            });
+        });
     };
 
     return (
@@ -75,15 +86,21 @@ const MyMap = ({ setProvince }) => {
             <MapContainer
                 center={[0.7893, 113.9213]}
                 zoom={5}
-                scrollWheelZoom={false}
+                scrollWheelZoom={true}
                 style={{ height: "100%", zIndex: 1 }}
             >
                 {provinces.length > 0 && (
-                    <GeoJSON
-                        style={countryStyle}
-                        data={provinces.map((map) => map.geojson)}
-                        onEachFeature={onEachCountry}
-                    />
+                    <>
+                        <TileLayer
+                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        <GeoJSON
+                            style={countryStyle}
+                            data={provinces.map((map) => map.geojson)}
+                            onEachFeature={onEachCountry}
+                        />
+                    </>
                 )}
 
                 {provinces.map((data) => (

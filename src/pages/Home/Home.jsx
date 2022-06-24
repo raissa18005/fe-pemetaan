@@ -12,8 +12,8 @@ const Home = () => {
                     MAPPIN merupakan website pemetaan permainan rakyat di
                     Indonesia. Pemetaan permainan disajikan dalam bentuk peta
                     Indonesia dengan pewarnaan klasifikasi jumlah permainan per
-                    provinsi. Mulai mencari permainan dengan tekan tombol
-                    berikut!
+                    provinsi. Mulai lihat pemetaan permainan rakyat dengan tekan
+                    tombol berikut!
                 </p>
                 <a href="/map">
                     <button>Lihat Peta</button>
