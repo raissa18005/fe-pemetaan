@@ -57,7 +57,6 @@ const List = ({ province, setProvince }) => {
         setProvince("");
         setYear("");
     };
-    console.log(isLoading);
 
     useEffect(() => {
         const applyFilters = () => {
@@ -83,7 +82,6 @@ const List = ({ province, setProvince }) => {
         };
         applyFilters();
     }, [year, province, inputSearch, cultures, isLoading]);
-    console.log(list);
 
     return (
         <div className="list">
