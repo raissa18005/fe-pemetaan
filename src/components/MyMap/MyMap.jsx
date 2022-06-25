@@ -5,10 +5,13 @@ import markerIconPng from "leaflet/dist/images/marker-icon.png";
 import { Icon } from "leaflet";
 import "./mymap.scss";
 import { publicRequest } from "../../requestMethods";
+import provinceDummy from "../../data/provincedummy.json";
 
 const MyMap = ({ setProvince }) => {
     const [provinces, setProvinces] = useState([]);
     const [calc, setCalc] = useState({});
+
+    console.log("Dummy", provinceDummy);
 
     useEffect(() => {
         const getAllData = async () => {
@@ -17,8 +20,11 @@ const MyMap = ({ setProvince }) => {
                 const provinceData = await publicRequest.get(`/provinces`);
                 const calcData = await publicRequest.get(`/cultures/calculate`);
                 setProvinces(
-                    mergeProvincesTotal(provinceData.data, totalData.data)
+                    mergeProvincesTotal(provinceDummy, totalData.data)
                 );
+                // setProvinces(
+                //     mergeProvincesTotal(provinceData.data, totalData.data)
+                // );
                 setCalc(calcData.data);
             } catch (err) {}
         };
