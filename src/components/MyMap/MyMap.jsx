@@ -135,6 +135,9 @@ const MyMap = ({ setProvince }) => {
             {calc.high && (
                 <div className="legend">
                     <div className="title">Klasifikasi</div>
+                    <div className="subtitle">
+                        (Jumlah permainan per provinsi)
+                    </div>
                     <div className="colorInfo">
                         <div
                             className="color"

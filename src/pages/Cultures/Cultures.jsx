@@ -73,6 +73,7 @@ const Cultures = () => {
     const reset = () => {
         setProvince("");
         setYear("");
+        setInputSearch("");
     };
 
     useEffect(() => {
@@ -143,6 +144,8 @@ const Cultures = () => {
                         thickness={5}
                     />
                 </div>
+            ) : list.length < 1 ? (
+                <div className="notfound">Hasil pencarian tidak ditemukan</div>
             ) : (
                 <>
                     <div className="card-container">

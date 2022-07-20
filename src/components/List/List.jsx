@@ -56,6 +56,7 @@ const List = ({ province, setProvince }) => {
     const reset = () => {
         setProvince("");
         setYear("");
+        setInputSearch("");
     };
 
     useEffect(() => {
@@ -121,6 +122,8 @@ const List = ({ province, setProvince }) => {
                         size="2rem"
                         thickness={5}
                     />
+                ) : list.length < 1 ? (
+                    <div className="">Hasil pencarian tidak ditemukan</div>
                 ) : (
                     list.map((culture) => <CultureCard culture={culture} />)
                 )}
