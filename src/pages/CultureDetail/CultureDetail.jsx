@@ -14,22 +14,10 @@ const CultureDetail = () => {
     const [culture, setCulture] = useState({});
     const location = useLocation();
     const id = location.pathname.split("/")[2];
-    // console.log(culture);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
-    const photos = [
-        "https://www.99.co/blog/indonesia/wp-content/uploads/2020/11/egrang.jpg",
-        "https://www.99.co/blog/indonesia/wp-content/uploads/2020/11/egrang.jpg",
-        "https://www.99.co/blog/indonesia/wp-content/uploads/2020/11/egrang.jpg",
-    ];
-    const videos = [
-        "https://www.youtube.com/embed/D4jq5Bd9bTA",
-        "https://www.youtube.com/embed/D4jq5Bd9bTA",
-        "https://www.youtube.com/embed/D4jq5Bd9bTA",
-    ];
 
     useEffect(() => {
         const getAllCultures = async () => {
@@ -60,12 +48,13 @@ const CultureDetail = () => {
                             <LocationOnIcon className="icon" />
                             {culture?.province?.name || "-"}
                         </div>
+                        {culture?.reg_num && (
+                            <div className="infos">
+                                {"No. " + culture?.reg_num || "-"}
+                            </div>
+                        )}
                         <div className="infos">
-                            {"No. " + culture?.reg_num || "-"}
-                        </div>
-                        <div className="infos">
-                            Tipe:
-                            {" " + culture?.type || "-"}
+                            {`Tipe : ${culture?.type ? culture.type : "-"}`}
                         </div>
                     </div>
                     <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -91,7 +80,7 @@ const CultureDetail = () => {
                                     alt=""
                                 />
                             </div>
-                            <p>
+                            <p className="desc">
                                 {culture.desc ||
                                     "Belum ada deskripsi tentang permainan ini"}
                             </p>
