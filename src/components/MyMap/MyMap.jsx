@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import ArrowIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
 import { Icon } from "leaflet";
 import "./mymap.scss";
 import { publicRequest } from "../../requestMethods";
 
-const MyMap = ({ setProvince }) => {
+const MyMap = ({ setProvince, isOpen, setIsOpen }) => {
     const [provinces, setProvinces] = useState([]);
     const [calc, setCalc] = useState({});
 
@@ -69,6 +70,7 @@ const MyMap = ({ setProvince }) => {
 
         layer.on("click", function (e) {
             setProvince(country.properties.provinceId);
+            setIsOpen(true);
         });
         layer.on("mouseover", function (e) {
             e.target.setStyle({
@@ -84,6 +86,9 @@ const MyMap = ({ setProvince }) => {
 
     return (
         <div className="myMap">
+            <div className="list-toggle" onClick={() => setIsOpen(true)}>
+                <ArrowIcon />
+            </div>
             <MapContainer
                 center={[0.7893, 113.9213]}
                 zoom={5}
@@ -116,7 +121,8 @@ const MyMap = ({ setProvince }) => {
                         }
                         eventHandlers={{
                             click: (e) => {
-                                setProvince(data.geojson.properties.provinceId); // will print 'FooBar' in console
+                                setProvince(data.geojson.properties.provinceId);
+                                setIsOpen(true); // will print 'FooBar' in console
                             },
                         }}
                     >

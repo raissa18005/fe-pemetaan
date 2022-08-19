@@ -1,12 +1,22 @@
 .list {
     flex: 3;
-    height: 100%;
     overflow-y: auto;
-    position: relative;
+    // height: 100%;
+    // position: relative;
+    position: absolute;
+    width: 300px;
+    height: calc(100% - 50px);
+    z-index: 2;
     background-color: #fff;
     transition: 0.4s all ease-in;
     min-width: 350px;
+    left: 0;
 
+
+    &.close {
+        // display: none;
+        left: -900px;
+    }
 
     .top {
         width: 100%;
@@ -19,6 +29,20 @@
         justify-content: center;
         top: 0;
         gap: 10px;
+
+        .close-icon {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            cursor: pointer;
+            background-color: whitesmoke;
+            padding: 5px;
+            border-radius: 50%;
+
+            &:hover {
+                background-color: lightgray;
+            }
+        }
 
         .search {
             display: flex;

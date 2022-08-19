@@ -5,9 +5,10 @@ import SelectFilter from "../SelectFilter/SelectFilter";
 import CultureCard from "../CultureCard/CultureCard";
 import { publicRequest } from "../../requestMethods";
 import CircularProgress from "@mui/material/CircularProgress";
+import CloseIcon from "@mui/icons-material/Close";
 import { tahun } from "../../utils/naming";
 
-const List = ({ province, setProvince }) => {
+const List = ({ province, setProvince, isOpen, setIsOpen }) => {
     const [year, setYear] = useState("");
     const [inputSearch, setInputSearch] = useState("");
     const [list, setList] = useState([]);
@@ -40,19 +41,6 @@ const List = ({ province, setProvince }) => {
         getAllCultures();
     }, []);
 
-    const years = [
-        {
-            id: 1,
-            label: 2018,
-            value: 2018,
-        },
-        {
-            id: 2,
-            label: 2019,
-            value: 2019,
-        },
-    ];
-
     const reset = () => {
         setProvince("");
         setYear("");
@@ -84,9 +72,14 @@ const List = ({ province, setProvince }) => {
         applyFilters();
     }, [year, province, inputSearch, cultures, isLoading]);
 
+    console.log(isOpen);
     return (
-        <div className="list">
+        <div className={isOpen ? "list" : "list close"}>
             <div className="top">
+                <CloseIcon
+                    className="close-icon"
+                    onClick={() => setIsOpen(false)}
+                />
                 <div className="search">
                     <input
                         type="text"

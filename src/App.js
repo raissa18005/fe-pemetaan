@@ -5,6 +5,7 @@ import Home from "./pages/Home/Home";
 import "./App.css";
 import Cultures from "./pages/Cultures/Cultures";
 import CultureDetail from "./pages/CultureDetail/CultureDetail";
+import DynamicMap from "./pages/DynamicMap/DynamicMap";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                     <Route path="/">
                         <Route index element={<Home />} />
                         <Route path="/map" element={<CultureMap />} />
+                        <Route path="/dynamicmap" element={<DynamicMap />} />
                         <Route path="/permainan">
                             <Route index element={<Cultures />} />
                             <Route
