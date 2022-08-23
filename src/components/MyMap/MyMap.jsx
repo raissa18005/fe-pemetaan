@@ -59,9 +59,9 @@ const MyMap = ({ setProvince, isOpen, setIsOpen }) => {
 
     const onEachCountry = (country, layer) => {
         if (country.properties.total) {
-            if (country.properties.total > calc.high) {
+            if (country.properties.total > calc.highBound) {
                 layer.options.fillColor = "green";
-            } else if (country.properties.total < calc.low) {
+            } else if (country.properties.total < calc.lowBound) {
                 layer.options.fillColor = "red";
             } else {
                 layer.options.fillColor = "yellow";
@@ -138,7 +138,7 @@ const MyMap = ({ setProvince, isOpen, setIsOpen }) => {
                     </Marker>
                 ))}
             </MapContainer>
-            {calc.high && (
+            {calc.highBound && (
                 <div className="legend">
                     <div className="title">Klasifikasi</div>
                     <div className="subtitle">
@@ -150,7 +150,9 @@ const MyMap = ({ setProvince, isOpen, setIsOpen }) => {
                             style={{ background: "green" }}
                         ></div>
                         <div>
-                            {" > " + Math.floor(calc.high) + " (Jumlah Tinggi)"}
+                            {" > " +
+                                Math.floor(calc.highBound) +
+                                " (Jumlah Tinggi)"}
                         </div>
                     </div>
                     <div className="colorInfo">
@@ -159,9 +161,9 @@ const MyMap = ({ setProvince, isOpen, setIsOpen }) => {
                             style={{ background: "yellow" }}
                         ></div>
                         <div>
-                            {Math.floor(calc.low) +
+                            {Math.floor(calc.lowBound) +
                                 " - " +
-                                Math.floor(calc.high) +
+                                Math.floor(calc.highBound) +
                                 " (Jumlah Sedang)"}
                         </div>
                     </div>
@@ -171,7 +173,9 @@ const MyMap = ({ setProvince, isOpen, setIsOpen }) => {
                             style={{ background: "red" }}
                         ></div>
                         <div>
-                            {" < " + Math.floor(calc.low) + " (Jumlah Sedikit)"}
+                            {" < " +
+                                Math.floor(calc.lowBound) +
+                                " (Jumlah Sedikit)"}
                         </div>
                     </div>
                     <div className="provInfo">
