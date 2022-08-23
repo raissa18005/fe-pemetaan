@@ -175,13 +175,13 @@ const MyMap = ({ setProvince, isOpen, setIsOpen }) => {
                         </div>
                     </div>
                     <div className="provInfo">
-                        Provinsi tinggi : {calc.highProvince}
+                        Provinsi tinggi : {calc.highProvinces}
                     </div>
                     <div className="provInfo">
-                        Provinsi sedang : {calc.midProvince}
+                        Provinsi sedang : {calc.midProvinces}
                     </div>
                     <div className="provInfo">
-                        Provinsi sedikit : {calc.lowProvince}
+                        Provinsi sedikit : {calc.lowProvinces}
                     </div>
                 </div>
             )}

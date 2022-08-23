@@ -30,7 +30,7 @@ const DynamicMap = () => {
     const getCalc = async (inputValue) => {
         try {
             const calcData = await publicRequest.get(
-                `/cultures/calculate?ref=${inputValue}`
+                `/cultures/calculate?acuan=${inputValue}`
             );
             setCalc(calcData.data);
         } catch (err) {}
