@@ -68,9 +68,9 @@ const DynamicMap = () => {
 
     const onEachCountry = (country, layer) => {
         if (country.properties.total) {
-            if (country.properties.total >= calc.high) {
+            if (country.properties.total > calc.highBound) {
                 layer.options.fillColor = "green";
-            } else if (country.properties.total <= calc.low) {
+            } else if (country.properties.total < calc.lowBound) {
                 layer.options.fillColor = "red";
             } else {
                 layer.options.fillColor = "yellow";
@@ -123,7 +123,7 @@ const DynamicMap = () => {
                         scrollWheelZoom={true}
                         style={{ height: "100%", zIndex: 1 }}
                     >
-                        {provinces.length > 0 && calc.high && (
+                        {provinces.length > 0 && calc.highBound && (
                             <>
                                 <TileLayer
                                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -180,7 +180,7 @@ const DynamicMap = () => {
                                 ></div>
                                 <div>
                                     {" > " +
-                                        Math.floor(calc.high) +
+                                        Math.floor(calc.highBound) +
                                         " (Jumlah Tinggi)"}
                                 </div>
                             </div>
@@ -192,7 +192,7 @@ const DynamicMap = () => {
                                 <div>
                                     {Math.floor(calc.low) +
                                         " - " +
-                                        Math.floor(calc.high) +
+                                        Math.floor(calc.highBound) +
                                         " (Jumlah Sedang)"}
                                 </div>
                             </div>
@@ -203,18 +203,18 @@ const DynamicMap = () => {
                                 ></div>
                                 <div>
                                     {" < " +
-                                        Math.floor(calc.low) +
+                                        Math.floor(calc.lowBound) +
                                         " (Jumlah Sedikit)"}
                                 </div>
                             </div>
                             <div className="provInfo">
-                                Provinsi tinggi : {calc.highProvince}
+                                Provinsi tinggi : {calc.highProvinces}
                             </div>
                             <div className="provInfo">
-                                Provinsi sedang : {calc.midProvince}
+                                Provinsi sedang : {calc.midProvinces}
                             </div>
                             <div className="provInfo">
-                                Provinsi sedikit : {calc.lowProvince}
+                                Provinsi sedikit : {calc.lowProvinces}
                             </div>
                             <div className="provInfo">
                                 Nilai Acuan : {calc.n}
